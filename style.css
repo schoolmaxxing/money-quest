@@ -1,0 +1,211 @@
+/* style.css */
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #282c34; 
+    color: #abb2bf; 
+    margin: 0;
+    padding-top: 0.5rem; /* Reduced top padding */
+    padding-bottom: 1rem;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    font-size: 0.7rem; /* Slightly smaller base for PressStart2P for density */
+}
+@media (min-width: 768px) {
+    body {
+        font-size: 0.8rem;
+    }
+}
+
+#game-container {
+    background-color: #333944; /* Slightly lighter game container */
+    border: 3px solid #5c6370;
+    padding: 10px 15px; /* Adjusted padding */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    max-width: 1200px; 
+}
+
+header h1 {
+    font-size: 1.7em; 
+    color: #61afef; 
+    text-shadow: 2px 2px #2a5a8a; /* Darker shadow */
+    margin-bottom: 15px; /* Reduced margin */
+}
+@media (min-width: 768px) {
+    header h1 {
+        font-size: 2.0em;
+    }
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+.card {
+    background-color: #404754; /* Darker cards */
+    border: 2px solid #555c69;
+    color: #c8ccd4; /* Lighter text in cards */
+    margin-bottom: 1rem; 
+}
+.card-header {
+    background-color: #4b5263; /* Consistent darker header */
+    color: #98c379; 
+    font-size: 0.9em; /* Adjusted for PressStart2P */
+    border-bottom: 2px solid #555c69;
+    padding: 0.4rem 0.8rem; 
+}
+
+.btn {
+    font-family: inherit;
+    box-shadow: 2px 2px #1e2227; /* Darker shadow for buttons */
+    border-width: 2px;
+    border-style: solid;
+    transition: all 0.05s ease-in-out; /* Faster transition */
+    font-size: 0.85em; 
+    padding: 0.35rem 0.7rem; /* Slightly adjusted padding */
+}
+.btn-lg {
+    font-size: 0.95em; 
+    padding: 0.5rem 1rem;
+}
+.btn:active {
+    box-shadow: none !important;
+    transform: translate(1px, 1px); /* Smaller active press */
+}
+/* Button color schemes (kept as is, they are distinct) */
+.btn-primary { background-color: #61afef; border-color: #3a6a9a; color: #282c34;}
+.btn-primary:hover { background-color: #529bde; border-color: #3a6a9a; }
+.btn-info { background-color: #56b6c2; border-color: #377c86; color: #282c34;}
+.btn-info:hover { background-color: #4aa5b0; border-color: #377c86; }
+.btn-warning { background-color: #e5c07b; border-color: #a98b59; color: #282c34;}
+.btn-warning:hover { background-color: #d8b36a; border-color: #a98b59;}
+.btn-success { background-color: #98c379; border-color: #6c8d53; color: #282c34;}
+.btn-success:hover { background-color: #8ab76a; border-color: #6c8d53; }
+.btn-danger { background-color: #e06c75; border-color: #a44d54; color: #282c34;}
+.btn-danger:hover { background-color: #d25b64; border-color: #a44d54; }
+.btn-secondary { background-color: #808080; border-color: #505050; color: #282c34;}
+.btn-outline-success { border-color: #98c379; color: #98c379;}
+.btn-outline-success:hover { background-color: #98c379; color: #282c34;}
+.btn-outline-info { border-color: #56b6c2; color: #56b6c2;}
+.btn-outline-info:hover { background-color: #56b6c2; color: #282c34;}
+
+
+.job-option { }
+.job-option.selected {
+    outline: 3px solid #00dd00 !important; /* Slightly thinner outline */
+    outline-offset: 1px;
+    transform: scale(1.03); 
+    box-shadow: 0 0 10px rgba(0, 200, 0, 0.4), 2px 2px #222 !important; 
+    font-weight: bold; 
+}
+.job-option:focus, .job-option.focus { box-shadow: 0 0 0 0.15rem rgba(0,123,255,.25); }
+.job-option.selected:focus, .job-option.selected.focus {
+     box-shadow: 0 0 10px rgba(0, 200, 0, 0.4), 2px 2px #222 !important; 
+}
+
+.pixel-input, .form-control {
+    font-family: inherit;
+    background-color: #3a3f4b; /* Darker inputs */
+    color: #c8ccd4;
+    border: 1px solid #5c6370; /* Thinner border */
+    padding: 0.4rem;
+    font-size: 0.9em; 
+}
+.form-control-sm.pixel-input { /* Specific for smaller investment inputs */
+    font-size: 0.85em;
+    padding: 0.25rem 0.4rem;
+}
+.pixel-input::placeholder { color: #7f8794; }
+
+.custom-range.pixel-slider {
+    padding: 0; height: 10px; /* Thinner slider */
+    background: #52596b; border: 1px solid #6c757d; cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+}
+.custom-range.pixel-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 16px; height: 16px; background: #e5c07b; border: 1px solid #a98b59;
+}
+.custom-range.pixel-slider::-moz-range-thumb {
+    width: 16px; height: 16px; background: #e5c07b; border: 1px solid #a98b59;
+    border-radius: 0; cursor: pointer;
+}
+
+/* Stats Bar */
+#stats-bar .row > div { 
+    padding: 3px 5px; 
+    border-left: 1px solid #4b5263; /* Slightly lighter border within stats */
+    font-size: 0.85em; /* Adjusted for overall body font size change */
+}
+#stats-bar .row > div:first-child { border-left: none; }
+#stats-bar span { word-break: normal; } /* Allow breaking but prefer not to */
+
+#stat-savings { color: #98c379; font-weight: bold; }
+#stat-investments { color: #56b6c2; font-weight: bold; } 
+#stat-debt { color: #e06c75; font-weight: bold; }
+#stat-happiness { color: #e5c07b; }
+.progress.pixel-progress {
+    background-color: #52596b; border: 1px solid #6c757d; padding: 1px; height: 16px !important; 
+}
+.progress-bar {
+    font-family: inherit; color: #282c34; font-size: 0.7em; line-height: 14px; 
+}
+.bg-warning { background-color: #e5c07b !important; }
+
+#log-list {
+    background-color: #3a3f4b; border: 1px solid #52596b; padding: 8px;
+    font-size: 0.9em; max-height: 250px; 
+}
+#log-list li { margin-bottom: 3px; border-bottom: 1px dashed #4b5263; padding-bottom: 2px; }
+
+/* Quests List */
+#achievements-list.list-group.list-group-flush .list-group-item {
+    background-color: transparent; /* Flush list items transparent */
+    border-color: #52596b; /* Border for flush items */
+    padding: 0.3rem 0.5rem; /* Reduced padding for quests */
+    font-size: 0.9em; 
+}
+#achievements-list .list-group-item.quest-incomplete { color: #c8ccd4; }
+#achievements-list .badge { font-size: 0.75em; }
+
+.modal-content.pixel-modal {
+    background-color: #3e4451; border: 3px solid #5c6370; color: #abb2bf;
+    font-size: 0.9em; 
+}
+.modal-header.pixel-modal, .modal-footer.pixel-modal { border-color: #5c6370; padding: 0.75rem; }
+.modal-title.pixel-modal { color: #61afef; font-size: 1.1em; }
+
+.budget-category label { display: block; margin-bottom: .1rem; font-size: 0.9em; }
+.budget-category input[type="range"] { width: 100%; }
+
+/* Investment Section Styling */
+#stock-market-options .stock-item {
+    padding: 0.4rem; border: 1px dashed #555c69; margin-bottom: 0.4rem; font-size: 0.9em; 
+}
+#stock-market-options .stock-item p { margin-bottom: 0.15rem; }
+#stock-market-options .stock-history { font-size: 0.8em; color: #888c93; }
+#stock-market-options .stock-sentiment { font-weight: bold; font-size: 0.85em; }
+#stock-market-options .stock-sentiment.bullish { color: #98c379; } 
+#stock-market-options .stock-sentiment.bearish { color: #e06c75; } 
+#stock-market-options .stock-sentiment.neutral { color: #e5c07b; } 
+#stock-market-options .stock-sentiment.volatile { color: #c678dd; } 
+
+#investment-section .form-control-sm { font-size: 0.85em; padding: 0.25rem 0.5rem; }
+#investment-section .btn-sm { font-size: 0.8em; padding: 0.25rem 0.5rem; }
+#investment-section label.small { font-size: 0.85em; margin-bottom: 0.1rem; }
+
+.small, small { font-size: 0.9em; } /* Make .small slightly larger relative to new base */
+
+.bg-dark-transparent { /* For sticky sim button background */
+    background-color: rgba(40, 44, 52, 0.85); /* Semi-transparent dark */
+}
+.sticky-bottom {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 0;
+    z-index: 100; /* Below modals but above other content */
+}
+
+/* Ensure labels in investment form-row are visible */
+#investment-section .form-row label.small {
+    color: #abb2bf; /* Match body text color if needed */
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Quest</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container" class="container my-3">
+        <header class="text-center mb-4">
+            <h1>Money Quest</h1>
+        </header>
+
+        <div id="start-screen" class="screen active card p-md-4 p-3">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-3">Welcome, UVA Grad!</h2>
+                <p class="text-center">You are 21 years old. Choose your starting path:</p>
+                <div id="job-options" class="d-grid gap-2 col-lg-6 col-md-8 mx-auto">
+                    <button class="btn btn-primary job-option my-2" data-income="40000" data-difficulty="Low">Low Income
+                        ($40k/year)</button>
+                    <button class="btn btn-info job-option my-2" data-income="90000" data-difficulty="Medium">Medium
+                        Income ($90k/year)</button>
+                    <button class="btn btn-warning job-option my-2" data-income="150000" data-difficulty="High">High
+                        Income ($150k/year)</button>
+                </div>
+                <div class="form-group mt-3 col-lg-6 col-md-8 mx-auto">
+                    <input type="text" id="playerName" class="form-control pixel-input"
+                        placeholder="Enter Your Name (Optional)">
+                </div>
+                <div class="text-center mt-3">
+                    <button id="startGameButton" class="btn btn-success btn-lg">Start Journey</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-game" class="screen">
+            <div id="stats-bar" class="card mb-3">
+                <div class="card-body p-2 p-sm-3">
+                    <div class="row text-center small align-items-center">
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-2 mb-lg-0">Player: <span
+                                id="stat-playerName"></span></div>
+                        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-2 mb-lg-0">Age: <span id="stat-age">21</span>
+                        </div>
+                        <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-2 mb-lg-0">Date: <span id="stat-month"></span>,
+                            <span id="stat-year"></span></div>
+                        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-2 mb-lg-0">Net Inc: $<span
+                                id="stat-monthly-income">0</span></div>
+                        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-2 mb-lg-0">Savings: $<span
+                                id="stat-savings">0</span></div>
+                        <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-2 mb-lg-0">Portfolio: $<span
+                                id="stat-investments">0</span></div>
+                        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-2 mb-md-0">Debt: $<span id="stat-debt"
+                                class="text-danger">0</span></div>
+                        <div class="col-12 col-sm-8 col-md-4 col-lg-3 mb-2 mb-md-0">
+                            Happiness: <span id="stat-happiness">70</span>%
+                            <div class="progress pixel-progress mt-1" style="height: 18px;">
+                                <div id="happiness-progress-bar" class="progress-bar bg-warning" role="progressbar"
+                                    style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-2 mb-md-0">House: <span
+                                id="stat-house-owned">None</span></div>
+                        <div class="col-6 col-sm-4 col-md-2 col-lg-1 mb-2 mb-md-0">Cars: <span
+                                id="stat-cars-owned">0</span></div>
+                        <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-0">Economy: <span
+                                id="stat-economy">Normal</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-7">
+                    <div id="budget-section" class="card mb-3">
+                        <div class="card-header">Monthly Budget (Post-Tax Income: $<span
+                                id="monthly-income-display">0</span>)</div>
+                        <div class="card-body">
+                            <p class="text-info small">Tax Rate: <span id="tax-rate-display">20</span>%. Min spending
+                                advised for well-being. Excess auto-saved.</p>
+                            <div class="budget-category form-group">
+                                <label for="budget-housing">Housing: $<span id="housing-value">500</span> (Min: $<span
+                                        id="housing-min-display">500</span>)</label>
+                                <input type="range" class="custom-range pixel-slider" id="budget-housing" min="500"
+                                    value="500" step="50">
+                            </div>
+                            <div class="budget-category form-group">
+                                <label for="budget-food">Food: $<span id="food-value">200</span> (Min: $<span
+                                        id="food-min-display">150</span>)</label>
+                                <input type="range" class="custom-range pixel-slider" id="budget-food" min="150"
+                                    value="200" step="10">
+                            </div>
+                            <div class="budget-category form-group">
+                                <label for="budget-utilities">Utilities: $<span id="utilities-value">100</span> (Min:
+                                    $<span id="utilities-min-display">75</span>)</label>
+                                <input type="range" class="custom-range pixel-slider" id="budget-utilities" min="75"
+                                    value="100" step="10">
+                            </div>
+                            <div class="budget-category form-group">
+                                <label for="budget-transport">Transport: $<span id="transport-value">100</span> (Min:
+                                    $<span id="transport-min-display">50</span>)</label>
+                                <input type="range" class="custom-range pixel-slider" id="budget-transport" min="50"
+                                    value="100" step="10">
+                            </div>
+                            <div class="budget-category form-group">
+                                <label for="budget-fun">Leisure/Fun: $<span id="fun-value">50</span></label>
+                                <input type="range" class="custom-range pixel-slider" id="budget-fun" min="0" value="50"
+                                    step="10">
+                            </div>
+                            <hr>
+                            <p>Total Budgeted Expenses: $<span id="total-allocated">0</span></p>
+                            <p>Remaining (Auto-Saved/Deficit): $<span id="remaining-for-savings">0</span></p>
+                        </div>
+                    </div>
+
+                    <div id="investment-section" class="card mb-3">
+                        <div class="card-header">Stock Market Investments</div>
+                        <div class="card-body">
+                            <p>Total Portfolio Value: $<span id="total-portfolio-value-display">0</span></p>
+                            <div id="stock-market-options" class="mb-3">
+                            </div>
+                            <hr>
+                            <div class="form-row align-items-center">
+                                <div class="col-sm-4 form-group mb-2 mb-sm-0">
+                                    <label for="stock-select" class="small d-block mb-1">Select Stock:</label>
+                                    <select id="stock-select" class="form-control form-control-sm pixel-input"></select>
+                                </div>
+                                <div class="col-sm-3 form-group mb-2 mb-sm-0">
+                                    <label for="shares-amount" class="small d-block mb-1">Shares:</label>
+                                    <input type="number" id="shares-amount"
+                                        class="form-control form-control-sm pixel-input" placeholder="Qty" min="1">
+                                </div>
+                                <div class="col-sm-auto form-group mb-0 text-center text-sm-left">
+                                    <button id="buy-shares-button"
+                                        class="btn btn-success btn-sm mt-3 mt-sm-0">Buy</button>
+                                </div>
+                                <div class="col-sm-auto form-group mb-0 text-center text-sm-left">
+                                    <button id="sell-shares-button"
+                                        class="btn btn-danger btn-sm mt-1 mt-sm-0">Sell</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="major-purchases-section" class="card mb-3">
+                        <div class="card-header">Major Purchases (from Savings)</div>
+                        <div class="card-body d-md-flex flex-wrap justify-content-start">
+                            <button id="buy-small-house-button"
+                                class="btn btn-outline-success m-1 discretionary-item major-purchase" data-cost="150000"
+                                data-happiness="25" data-type="house" data-house-type="small"
+                                data-name="Small Starter House">Buy Small House ($150k)</button>
+                            <button id="buy-medium-house-button"
+                                class="btn btn-outline-success m-1 discretionary-item major-purchase" data-cost="300000"
+                                data-happiness="40" data-type="house" data-house-type="medium"
+                                data-name="Medium Family House">Buy Medium House ($300k)</button>
+                            <button id="buy-car-button"
+                                class="btn btn-outline-info m-1 discretionary-item major-purchase" data-cost="150000"
+                                data-happiness="20" data-type="car" data-name="New Car">Buy New Car ($150k)</button>
+                        </div>
+                    </div>
+
+                    <div id="actions-section" class="card mb-3">
+                        <div class="card-header">Discretionary Spending (from Savings)</div>
+                        <div class="card-body d-md-flex flex-wrap justify-content-start">
+                            <div id="discretionary-items"><button
+                                    class="btn btn-sm btn-secondary m-1 discretionary-item" data-cost="500"
+                                    data-happiness="1" data-type="luxury" data-item-name="Weekend Getaway">Weekend
+                                    Getaway ($500)</button>
+                                    <button class="btn btn-sm btn-secondary m-1 discretionary-item" data-cost="2000"
+                                        data-happiness="2" data-type="luxury"
+                                        data-item-name="New High-Tech Gadget">Gadget ($2k)</button>
+                                    <button class="btn btn-sm btn-secondary m-1 discretionary-item" data-cost="5000"
+                                        data-happiness="4" data-type="luxury" data-item-name="Luxury Vacation">Luxury
+                                        Vacation ($5k)</button>
+                                    <button class="btn btn-sm btn-secondary m-1 discretionary-item" data-cost="150"
+                                        data-happiness="0" data-type="shoes" data-item-name="Fancy Shoes">Shoes
+                                        ($150)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div id="quests-section" class="card mb-3">
+                        <div class="card-header">Active Quests</div>
+                        <div class="card-body p-2">
+                            <ul id="achievements-list" class="list-group list-group-flush"></ul>
+                        </div>
+                    </div>
+                    <div id="event-log" class="card mb-3">
+                        <div class="card-header">Monthly Log</div>
+                        <div class="card-body p-2" style="max-height: 280px; overflow-y: auto;">
+                            <ul id="log-list" class="list-unstyled small"></ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3 sticky-bottom p-2 bg-dark-transparent d-lg-block">
+                        <button id="sim-month-button" class="btn btn-primary btn-lg">Simulate Next Month</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="screen card p-md-4 p-3">
+            <div class="card-body text-center">
+                <h2 id="game-over-title" class="card-title text-danger mb-3">Game Over</h2>
+                <p id="game-over-message" class="card-text mb-4"></p>
+                <button id="restart-game-button" class="btn btn-lg btn-warning">Restart Game</button>
+            </div>
+        </div>
+
+        <div id="win-screen" class="screen card p-md-4 p-3">
+            <div class="card-body text-center">
+                <h2 class="card-title text-success mb-3">Congratulations!</h2>
+                <p class="mb-2">You've reached $3,000,000 net worth and can now retire comfortably!</p>
+                <p class="mb-3"><strong>Final Stats:</strong></p>
+                <ul id="win-stats" class="list-unstyled text-left col-md-8 mx-auto"></ul>
+                <button id="restart-game-win-button" class="btn btn-lg btn-primary mt-3">Play Again?</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content pixel-modal">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Event!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-message"></p>
+                    </div>
+                    <div class="modal-footer"><button type="button" id="modal-close-button" class="btn btn-primary"
+                            data-dismiss="modal">OK</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
